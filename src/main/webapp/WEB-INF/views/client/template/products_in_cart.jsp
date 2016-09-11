@@ -1,0 +1,47 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-xl-10 col-xl-offset-1 full-cart">
+        <table class="table cart-table">
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Price</th>
+            </tr>
+            <c:forEach items="${sale_positions}" var="position">
+                <tr>
+                    <td>
+                        <a href="/product_${position.product.url}" title="Go to ${position.product.title}">
+                           ${position.product.title}
+                        </a>
+                    </td>
+                    <td>${position.number}</td>
+                    <td>
+                        <img width="50px" height="50px"
+                             src="/resources/img/${position.product.photo.photoLinkShort}"
+                             alt="${position.product.title}">
+                    </td>
+                    <td>
+                        <a href="/category_${position.product.category.url}"
+                           title="Go to category ${position.product.category.title}">
+                                ${position.product.category.title}</a>
+                    </td>
+                    <td>
+                        <fmt:formatNumber type="number" value="${position.product.price}"/> грн
+                    </td>
+                </tr>
+            </c:forEach>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right;"><strong>Total:</strong></td>
+                <td><b><fmt:formatNumber type="number" value="${price_of_cart}"/> eur</b></td>
+            </tr>
+        </table>
+    </div>
+</div>
